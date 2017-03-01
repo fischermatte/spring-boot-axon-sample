@@ -1,10 +1,6 @@
 package nl.avthart.todo.app.configuration;
 
-import java.io.File;
-import java.util.Arrays;
-
 import nl.avthart.todo.app.domain.task.Task;
-
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.commandhandling.SimpleCommandBus;
 import org.axonframework.commandhandling.annotation.AggregateAnnotationCommandHandler;
@@ -20,6 +16,10 @@ import org.axonframework.eventstore.fs.FileSystemEventStore;
 import org.axonframework.eventstore.fs.SimpleEventFileResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.io.File;
+
+import static java.util.Collections.singletonList;
 
 /**
  * Axon Java Configuration with reasonable defaults like SimpleCommandBus, SimpleEventBus and GenericJpaRepository.
@@ -48,7 +48,7 @@ public class AxonConfiguration {
 	@Bean
 	public CommandBus commandBus() {
 		SimpleCommandBus commandBus = new SimpleCommandBus();
-		commandBus.setHandlerInterceptors(Arrays.asList(new BeanValidationInterceptor()));
+		commandBus.setHandlerInterceptors(singletonList(new BeanValidationInterceptor()));
 //		commandBus.setTransactionManager(new SpringTransactionManager(transactionManager));
 		return commandBus;
 	}
@@ -80,7 +80,6 @@ public class AxonConfiguration {
 	
 	@Bean
 	public AggregateAnnotationCommandHandler<Task> taskCommandHandler() {
-		AggregateAnnotationCommandHandler<Task> commandHandler = AggregateAnnotationCommandHandler.subscribe(Task.class, taskRepository(), commandBus());
-		return commandHandler;
+		return (AggregateAnnotationCommandHandler<Task>) AggregateAnnotationCommandHandler.subscribe(Task.class, taskRepository(), commandBus());
 	}
 }
