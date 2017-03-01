@@ -9,8 +9,6 @@ import nl.avthart.todo.app.query.task.TaskEntryRepository;
 import nl.avthart.todo.app.rest.task.requests.CreateTaskRequest;
 import nl.avthart.todo.app.rest.task.requests.ModifyTitleRequest;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.axonframework.domain.DefaultIdentifierFactory;
-import org.axonframework.domain.IdentifierFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.UUID;
 
 /**
  * @author albert
@@ -27,28 +26,27 @@ import java.security.Principal;
 @RestController
 public class TaskController {
 
-    private final IdentifierFactory identifierFactory = new DefaultIdentifierFactory();
+    private final TaskEntryRepository taskEntryRepository;
+    private final SimpMessageSendingOperations messagingTemplate;
+    private final CommandGateway commandGateway;
 
     @Autowired
-    private TaskEntryRepository taskEntryRepository;
-
-    @Autowired
-    private SimpMessageSendingOperations messagingTemplate;
-
-    @Autowired
-    private CommandGateway commandGateway;
+    public TaskController(TaskEntryRepository taskEntryRepository, SimpMessageSendingOperations messagingTemplate, CommandGateway commandGateway) {
+        this.taskEntryRepository = taskEntryRepository;
+        this.messagingTemplate = messagingTemplate;
+        this.commandGateway = commandGateway;
+    }
 
     @RequestMapping(value = "/api/tasks", method = RequestMethod.GET)
-    public
     @ResponseBody
-    Page<TaskEntry> findlAll(Principal principal, @RequestParam(required = false, defaultValue = "false") boolean completed, Pageable pageable) {
+    public Page<TaskEntry> findlAll(Principal principal, @RequestParam(required = false, defaultValue = "false") boolean completed, Pageable pageable) {
         return taskEntryRepository.findByUsernameAndCompleted(principal.getName(), completed, pageable);
     }
 
     @RequestMapping(value = "/api/tasks", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void createTask(Principal principal, @RequestBody @Valid CreateTaskRequest request) {
-        commandGateway.send(new CreateTaskCommand(identifierFactory.generateIdentifier(), principal.getName(), request.getTitle()));
+        commandGateway.send(new CreateTaskCommand(UUID.randomUUID().toString(), principal.getName(), request.getTitle()));
     }
 
     @RequestMapping(value = "/api/tasks/{identifier}/title", method = RequestMethod.POST)

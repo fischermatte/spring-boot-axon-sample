@@ -4,21 +4,22 @@ import nl.avthart.todo.app.domain.task.commands.*;
 import nl.avthart.todo.app.domain.task.events.*;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
+import org.axonframework.commandhandling.model.AggregateRoot;
 import org.axonframework.eventhandling.EventHandler;
 
 import javax.validation.constraints.NotNull;
+
+import java.io.Serializable;
+
+import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
 /**
  * Task
  *
  * @author albert
  */
-public class Task extends AbstractAnnotatedAggregateRoot<String> {
-
-    /**
-     * The constant serialVersionUID
-     */
-    private static final long serialVersionUID = -5977984483620451665L;
+@AggregateRoot
+public class Task implements Serializable {
 
     @AggregateIdentifier
     private String id;
