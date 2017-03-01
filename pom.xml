@@ -15,10 +15,8 @@
 
     <properties>
         <axon.version>3.0.2</axon.version>
-        <hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
         <jna.version>4.3.0</jna.version>
         <lombok.version>1.12.6</lombok.version>
-        <spring-data-elasticsearch.version>2.1.0.RELEASE</spring-data-elasticsearch.version>
         <junit.version>4.12</junit.version>
         <spring-test.version>4.3.6.RELEASE</spring-test.version>
     </properties>
@@ -45,6 +43,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.axonframework</groupId>
             <artifactId>axon-spring-boot-starter</artifactId>
             <version>${axon.version}</version>
@@ -58,20 +60,10 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>${hibernate-jpa-2.0-api.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-elasticsearch</artifactId>
-            <version>${spring-data-elasticsearch.version}</version>
         </dependency>
         <dependency>
             <groupId>net.java.dev.jna</groupId>

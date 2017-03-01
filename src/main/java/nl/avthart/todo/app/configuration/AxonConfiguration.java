@@ -9,9 +9,6 @@ import org.axonframework.eventsourcing.eventstore.EventStore;
 import org.axonframework.eventsourcing.eventstore.inmemory.InMemoryEventStorageEngine;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-
-import static nl.avthart.todo.app.configuration.Profiles.LOCAL;
 
 /**
  * Axon Java Configuration with inmemory eventsourcing repository.
@@ -22,7 +19,6 @@ import static nl.avthart.todo.app.configuration.Profiles.LOCAL;
 @Configuration
 public class AxonConfiguration {
 
-    @Profile(LOCAL)
     @Bean
     public EventStorageEngine eventStorageEngine(){
         return new InMemoryEventStorageEngine();
