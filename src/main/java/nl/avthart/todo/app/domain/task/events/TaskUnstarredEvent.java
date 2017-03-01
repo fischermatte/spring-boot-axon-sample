@@ -8,5 +8,5 @@ import lombok.Value;
 @Value
 public class TaskUnstarredEvent implements TaskEvent {
 
-	private final String id;
+    private final String id;
 }

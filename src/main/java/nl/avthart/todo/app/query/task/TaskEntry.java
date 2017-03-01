@@ -1,12 +1,6 @@
 package nl.avthart.todo.app.query.task;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -21,17 +15,17 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @EqualsAndHashCode
 public class TaskEntry {
 
-	@Id
-	private String id;
-	
-	private String username;
-	
-	@Setter
-	private String title;
-	
-	@Setter
-	private boolean completed;
-	
-	@Setter
-	private boolean starred;
+    @Id
+    private String id;
+
+    private String username;
+
+    @Setter
+    private String title;
+
+    @Setter
+    private boolean completed;
+
+    @Setter
+    private boolean starred;
 }

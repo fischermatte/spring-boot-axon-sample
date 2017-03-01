@@ -1,10 +1,9 @@
 package nl.avthart.todo.app.domain.task.commands;
 
-import javax.validation.constraints.NotNull;
-
 import lombok.Value;
-
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @author albert
@@ -12,10 +11,10 @@ import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 @Value
 public class ModifyTaskTitleCommand {
 
-	@TargetAggregateIdentifier
-	private final String id;
+    @TargetAggregateIdentifier
+    private final String id;
 
-	@NotNull
-	private final String title;
+    @NotNull
+    private final String title;
 }
 

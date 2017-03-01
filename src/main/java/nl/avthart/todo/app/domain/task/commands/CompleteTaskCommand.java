@@ -1,7 +1,6 @@
 package nl.avthart.todo.app.domain.task.commands;
 
 import lombok.Value;
-
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 
 /**
@@ -10,6 +9,6 @@ import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 @Value
 public class CompleteTaskCommand {
 
-	@TargetAggregateIdentifier
-	private final String id;
+    @TargetAggregateIdentifier
+    private final String id;
 }

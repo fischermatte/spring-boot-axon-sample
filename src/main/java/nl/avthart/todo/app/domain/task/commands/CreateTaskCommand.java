@@ -1,8 +1,8 @@
 package nl.avthart.todo.app.domain.task.commands;
 
-import javax.validation.constraints.NotNull;
-
 import lombok.Value;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @author albert
@@ -10,12 +10,12 @@ import lombok.Value;
 @Value
 public class CreateTaskCommand {
 
-	@NotNull
-	private final String id;
-	
-	@NotNull
-	private final String username;
-	
-	@NotNull
-	private final String title;
+    @NotNull
+    private final String id;
+
+    @NotNull
+    private final String username;
+
+    @NotNull
+    private final String title;
 }
