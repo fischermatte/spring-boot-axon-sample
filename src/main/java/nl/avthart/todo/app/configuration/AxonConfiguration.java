@@ -1,19 +1,16 @@
 package nl.avthart.todo.app.configuration;
 
 import nl.avthart.todo.app.domain.task.Task;
+import org.axonframework.commandhandling.AggregateAnnotationCommandHandler;
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.commandhandling.SimpleCommandBus;
-import org.axonframework.commandhandling.annotation.AggregateAnnotationCommandHandler;
-import org.axonframework.commandhandling.annotation.AnnotationCommandHandlerBeanPostProcessor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.axonframework.commandhandling.gateway.CommandGatewayFactoryBean;
-import org.axonframework.commandhandling.interceptors.BeanValidationInterceptor;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventhandling.SimpleEventBus;
-import org.axonframework.eventhandling.annotation.AnnotationEventListenerBeanPostProcessor;
 import org.axonframework.eventsourcing.EventSourcingRepository;
-import org.axonframework.eventstore.fs.FileSystemEventStore;
-import org.axonframework.eventstore.fs.SimpleEventFileResolver;
+import org.axonframework.messaging.interceptors.BeanValidationInterceptor;
+import org.axonframework.spring.commandhandling.gateway.CommandGatewayFactoryBean;
+import org.axonframework.spring.config.annotation.AnnotationCommandHandlerBeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

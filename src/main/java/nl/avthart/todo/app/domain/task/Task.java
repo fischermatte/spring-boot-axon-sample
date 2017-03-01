@@ -2,10 +2,9 @@ package nl.avthart.todo.app.domain.task;
 
 import nl.avthart.todo.app.domain.task.commands.*;
 import nl.avthart.todo.app.domain.task.events.*;
-import org.axonframework.commandhandling.annotation.CommandHandler;
-import org.axonframework.eventhandling.annotation.EventHandler;
-import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
-import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
+import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.commandhandling.model.AggregateIdentifier;
+import org.axonframework.eventhandling.EventHandler;
 
 import javax.validation.constraints.NotNull;
 
