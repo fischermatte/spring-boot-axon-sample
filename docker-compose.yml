@@ -1,42 +1,47 @@
-version: '2'
+version: '3'
+
 services:
-  todoapp_elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.2.2
-    container_name: todoapp_elasticsearch
+  master:
+    image: itzg/elasticsearch:2.4.0
     environment:
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536
-        hard: 65536
-    mem_limit: 1g
-    cap_add:
-      - IPC_LOCK
-    volumes:
-      - todoapp_volume:/usr/share/elasticsearch/data
+      TYPE: MASTER
+      UNICAST_HOSTS: master
+      MIN_MASTERS: 1
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+  data:
+    image: itzg/elasticsearch:2.4.0
+    environment:
+      TYPE: DATA
+      UNICAST_HOSTS: master
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 60s
+  gateway:
+    image: itzg/elasticsearch:2.4.0
     ports:
-      - 9200:9200
-    networks:
-      - todoapp_network
-  todoapp_service:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      TYPE: GATEWAY
+      UNICAST_HOSTS: master
+  kibana:
+    image: kibana:4.6.4
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://gateway:9200
+  todoapp:
     image: fischermatte/todo-app:0.0.1-SNAPSHOT
-    container_name: todoapp_service
+    container_name: todoapp
     ports:
       - 8080:8080
-    networks:
-      - todoapp_network
+    environment:
+      - spring.data.elasticsearch.cluster-name=elasticsearch
+      - spring.data.elasticsearch.cluster-nodes=gateway:9300
     depends_on:
-      - todoapp_elasticsearch
-
-volumes:
-  todoapp_volume:
-    driver: local
-
-networks:
-  todoapp_network:
-    driver: bridge
+      - gateway
