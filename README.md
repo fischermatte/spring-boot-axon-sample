@@ -17,7 +17,16 @@ Building
 
 Running
 =======
+Starts spring boot app with local elasticsearch and InMemory event store.
 > mvn spring-boot:run
+
+Browse to http://localhost:8080/index.html
+
+Running (with elasticsearch cluster)
+=======
+Builds a docker image with the spring boot app and runs it with an elastic search cluster
+> mvn install -P docker-build
+> docker-compose up
 
 Browse to http://localhost:8080/index.html
 
