@@ -1,5 +1,8 @@
 Introduction
 ============
+
+[![Build Status](https://travis-ci.org/fischermatte/spring-boot-axon-todo-app.svg?branch=master)](https://travis-ci.org/fischermatte/spring-boot-axon-todo-app) 
+
 This is a sample application to demonstrate Spring Boot, ElasticSearch and Axon Framework V3.
 
 The Todo application makes use of the following design patterns:

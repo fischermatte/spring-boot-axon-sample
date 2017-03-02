@@ -1,13 +1,3 @@
-todo-application/.classpath
-todo-application/.project
-todo-application/target
-.DS_Store
-todo-application/.settings
-todo-application/.springBeans
-todo-application/data
-/.idea/libraries/Maven__org_springframework_data_spring_data_commons_1_13_0_RELEASE.xml
-/.gitignore
-/.idea/libraries/Maven__org_springframework_data_spring_data_elasticsearch_2_1_0_RELEASE.xml
+/target/
 /.idea/
-/todo-application.iml
-/data/
+/*.iml
